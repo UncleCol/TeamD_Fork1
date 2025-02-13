@@ -30,3 +30,4 @@ resource "azurerm_virtual_machine" "vm-pub1" {
 	}
 
 	tags = var.tags
+}
