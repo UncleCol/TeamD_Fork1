@@ -26,30 +26,40 @@ variable "public1_subnet_address_prefix" {
 
 variable "public2_subnet_address_prefix" {
   type        = string
-  description = "Azure Public2 Subnet Address Space"
-  
+  description = "Azure Public2 Subnet Address Space"  
 }
 
 variable "public3_subnet_address_prefix" {
   type        = string
-  description = "Azure Public3 Subnet Address Space"
-  
+  description = "Azure Public3 Subnet Address Space"  
 }
 
-variable "private4_subnet_address_prefix" {
+variable "private1_subnet_address_prefix" {
   type        = string
-  description = "Azure Private4 Subnet Address Space"
-  
+  description = "Azure Private4 Subnet Address Space"  
 }
 
-variable "private5_subnet_address_prefix" {
+variable "private2_subnet_address_prefix" {
   type        = string
-  description = "Azure Private5 Subnet Address Space"
-  
+  description = "Azure Private5 Subnet Address Space"  
 }
-variable "private6_subnet_address_prefix" {
+variable "private3_subnet_address_prefix" {
   type        = string
   description = "Azure Private6 Subnet Address Space"
-  
-  
+}
+
+variable "admin_username" {
+  type        = string
+  description = "Admin Username for VMs"  
+}
+
+variable "admin_password" {
+  type        = string
+  description = "Admin Password for VMs"  
+}
+
+variable "vm_size" {
+  type        = string
+  description = "Size of VMs"
+  default     = "Standard_B1s"  
 }
