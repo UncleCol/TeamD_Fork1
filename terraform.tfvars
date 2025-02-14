@@ -10,7 +10,7 @@ private3_subnet_address_prefix = "192.168.6.0/24"
 # VMs
 admin_username = "azureuser"
 admin_password = "IrishLife1234!"
-vm_size = "Standard_B1s"
+vm_size        = "Standard_B1s"
 tags = {
   "DeployedBy"  = "Col+Brian"
   "Environment" = "production"

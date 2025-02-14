@@ -2,6 +2,7 @@
 Terraform.code-workspace
 .terraform/terraform.tfstate
 graph.svg
+*.tfplan
 
 # Local .terraform directories
 **/.terraform/*
