@@ -1,3 +1,4 @@
+# Vnet
 resource "azurerm_virtual_network" "virtual_network" {
   name                = "${var.name}-vnet"
   location            = var.location
@@ -8,6 +9,7 @@ resource "azurerm_virtual_network" "virtual_network" {
 
 }
 
+# Subnets
 resource "azurerm_subnet" "public1_subnet" {
   name                 = "${var.name}-public1-subnet"
   resource_group_name  = data.azurerm_resource_group.resource_group.name
@@ -56,6 +58,7 @@ resource "azurerm_subnet" "private3_subnet" {
 
 }
 
+# Network Interfaces
 resource "azurerm_network_interface" "nic-pub1" {
   name                = "${var.name}-nic-pub1"
   location            = var.location
