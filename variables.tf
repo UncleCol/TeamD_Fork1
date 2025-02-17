@@ -15,6 +15,11 @@ variable "location" {
   description = "Azure Location of resources"
 }
 
+variable "environment" {
+  type        = string
+  description = "Environment of resources"
+}
+
 variable "tags" {
   type = map(string)
 }
