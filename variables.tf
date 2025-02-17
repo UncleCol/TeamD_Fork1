@@ -24,33 +24,14 @@ variable "network_address_space" {
   description = "Azure VNET Address Space"
 }
 
-variable "public1_subnet_address_prefix" {
-  type        = string
-  description = "Azure Public1 Subnet Address Space"
-}
-
-variable "public2_subnet_address_prefix" {
-  type        = string
-  description = "Azure Public2 Subnet Address Space"
-}
-
-variable "public3_subnet_address_prefix" {
-  type        = string
-  description = "Azure Public3 Subnet Address Space"
-}
-
 variable "private1_subnet_address_prefix" {
   type        = string
-  description = "Azure Private4 Subnet Address Space"
+  description = "Azure Private1 Subnet Address Space"
 }
 
 variable "private2_subnet_address_prefix" {
   type        = string
-  description = "Azure Private5 Subnet Address Space"
-}
-variable "private3_subnet_address_prefix" {
-  type        = string
-  description = "Azure Private6 Subnet Address Space"
+  description = "Azure Private2 Subnet Address Space"
 }
 
 variable "admin_username" {

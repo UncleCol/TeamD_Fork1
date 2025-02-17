@@ -1,5 +1,5 @@
 
 resource "azurerm_resource_group" "resource_group" {
-  name     = data.azurerm_resource_group.resource_group.name
+  name     = "${var.name}-forked-rg"
   location = "var.location"
 }

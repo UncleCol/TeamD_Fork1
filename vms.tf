@@ -2,7 +2,7 @@
 
 resource "azurerm_virtual_machine" "vm-private1" {
   name                  = "${var.name}-vm-private1"
-  resource_group_name   = data.azurerm_resource_group.resource_group.name
+  resource_group_name   = azurerm_resource_group.resource_group.name
   location              = var.location
   vm_size               = var.vm_size
   network_interface_ids = [azurerm_network_interface.nic-priv1.id]
@@ -35,7 +35,7 @@ resource "azurerm_virtual_machine" "vm-private1" {
 
 resource "azurerm_virtual_machine" "vm-private2" {
   name                  = "${var.name}-vm-private2"
-  resource_group_name   = data.azurerm_resource_group.resource_group.name
+  resource_group_name   = azurerm_resource_group.resource_group.name
   location              = var.location
   vm_size               = var.vm_size
   network_interface_ids = [azurerm_network_interface.nic-priv2.id]
