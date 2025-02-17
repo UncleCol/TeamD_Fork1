@@ -1,7 +1,7 @@
 terraform {
   required_version = ">= 1.9.6"
   backend "azurerm" {
-    resource_group_name  = "teamd-sa-rg"
+    resource_group_name  = "teamd-sa-rg" # TODO tf state file sits in a separate resource group, should it?????
     storage_account_name = "teamdsa"
     container_name       = "teamdstoragecont"
     key                  = "acr-terraform.tfstate"
