@@ -15,9 +15,9 @@ resource "azurerm_virtual_machine" "vm-private1" {
   }
 
   storage_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2019-Datacenter"
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "18.04-LTS"
     version   = "latest"
   }
 
@@ -47,10 +47,10 @@ resource "azurerm_virtual_machine" "vm-private2" {
     managed_disk_type = "Standard_LRS"
   }
 
-  storage_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2019-Datacenter"
+ storage_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "18.04-LTS"
     version   = "latest"
   }
 

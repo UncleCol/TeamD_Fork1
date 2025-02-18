@@ -39,6 +39,11 @@ variable "private2_subnet_address_prefix" {
   description = "Azure Private2 Subnet Address Space"
 }
 
+variable "public_subnet_address_prefix" {
+  type        = string
+  description = "Azure Public Subnet Address Space"  
+}
+
 variable "admin_username" {
   type        = string
   description = "Admin Username for VMs"

@@ -1,6 +1,6 @@
-# Load balancer for windows VMs
+# Load balancer for VMs
 resource "azurerm_lb" "lb" {
-  name                = "${var.name}-lb" # TODO ref env in name
+  name                = "${var.name}-${var.environment}-lb" # TODO ref env in name
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = var.location
   sku                 = "Basic"
