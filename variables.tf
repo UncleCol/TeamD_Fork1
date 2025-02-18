@@ -69,3 +69,37 @@ variable "vm_size" {
   description = "Size of VMs"
   default     = "Standard_B1s"
 }
+
+variable "sql_admin_username" {
+  description = "The administrator username for the SQL server."
+  type        = string
+}
+
+variable "sql_admin_password" {
+  description = "The administrator password for the SQL server."
+  type        = string
+  sensitive   = true
+}
+
+variable "availability_zones" {
+  description = "List of availability zones to deploy the SQL databases."
+  type        = list(string)
+  default     = ["2"] #TODO - Use 2 for second machine
+}
+
+variable "sql_admin_username" {
+  description = "The administrator username for the SQL server."
+  type        = string
+}
+
+variable "sql_admin_password" {
+  description = "The administrator password for the SQL server."
+  type        = string
+  sensitive   = true
+}
+
+variable "availability_zones" {
+  description = "List of availability zones to deploy the SQL databases."
+  type        = list(string)
+  default     = ["2"] #TODO - Use 2 for second machine
+}
