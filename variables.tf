@@ -68,5 +68,5 @@ variable "sql_admin_password" {
 variable "availability_zones" {
   description = "List of availability zones to deploy the SQL databases."
   type        = list(string)
-  default     = "1"
+  default     = ["2"] #TODO - Use 2 for second machine
 }
