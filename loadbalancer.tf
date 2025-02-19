@@ -6,13 +6,13 @@ resource "azurerm_lb" "lb" {
   sku                 = "Basic"
 
   frontend_ip_configuration {
-    name                 = "${var.name}-frontend-ip"
+    name                 = "${var.name}-${var.environment}-frontend-ip"
     public_ip_address_id = azurerm_public_ip.public_ip.id
   }
 }
 
 resource "azurerm_public_ip" "public_ip" {
-  name                = "${var.name}-pip"
+  name                = "${var.name}-${var.environment}-pip"
   location            = var.location
   resource_group_name = azurerm_resource_group.resource_group.name
   allocation_method   = "Static"

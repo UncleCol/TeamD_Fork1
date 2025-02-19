@@ -44,6 +44,11 @@ variable "public_subnet_address_prefix" {
   description = "Azure Public Subnet Address Space"  
 }
 
+variable "ag_subnet_address_prefix" {
+  type        = string
+  description = "Azure AG Subnet Address Space"  
+}
+
 variable "admin_username" {
   type        = string
   description = "Admin Username for VMs"
