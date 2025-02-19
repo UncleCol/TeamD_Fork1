@@ -18,6 +18,10 @@ crash.log
 *.tfvars
 *.tfvars.json
 
+# Keep environment tfvars files
+!dev.tfvars
+!prod.tfvars
+
 # Override files
 override.tf
 override.tf.json
