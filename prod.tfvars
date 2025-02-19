@@ -1,4 +1,6 @@
+
 environment = "prod"
+location= "westeurope"
 
 tags = {
   "DeployedBy"  = "Col+Brian"
