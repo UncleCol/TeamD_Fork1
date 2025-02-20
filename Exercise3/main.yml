@@ -28,9 +28,9 @@ stages:
         ServiceConnectionName: $(ServiceConnectionName)
         # backend-rg: $(bk-rg-name)
         backend-rg: 'teamd-sa-rg'
-        backend-storage: $(bk-strg-name)
-        backend-container: $(bk-container-name)
-        backend-key: $(bk-strg-key)
+        backend-storage: 'teamdsa'
+        backend-container: 'teamstoragecont'
+        backend-key: 'acr-terraform.tfstate'
         environment: 'dev'
     # - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
     #   - template: prod-plan.yml
@@ -51,10 +51,10 @@ stages:
     - template: dev-deploy.yml
       parameters:
         ServiceConnectionName: $(ServiceConnectionName)
-        backend-rg: $(bk-rg-name)
-        backend-storage: $(bk-strg-name)
-        backend-container: $(bk-container-name)
-        backend-key: $(bk-strg-key)
+        backend-rg: 'teamd-sa-rg'
+        backend-storage: 'teamdsa'
+        backend-container: 'teamstoragecont'
+        backend-key: 'acr-terraform.tfstate'
         environment: 'dev'
     # - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/prod') }}:
     #   - template: prod-deploy.yml
