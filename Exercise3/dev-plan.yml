@@ -1,0 +1,53 @@
+# take in parameters from main.yml and use them to run terraform plan
+
+parameters:
+  ServiceConnectionName: ''
+  backend-rg: ''
+  backend-storage: ''
+  backend-container: ''
+  backend-key: ''
+  environment: '' # For future use
+
+jobs:
+  - job: plan
+    displayName: 'Terraform Plan'
+    continueOnError: false
+
+    steps:
+    - task: TerraformInstaller@1
+      displayName: 'Install Terraform'
+      inputs:
+        terraformVersion: 'latest'
+
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
+        backendServiceArm: '$(ServiceConnectionName)'
+        backendAzureRmResourceGroupName: '$(backend-rg)'
+        backendAzureRmStorageAccountName: '$(backend-storage)'
+        backendAzureRmContainerName: '$(backend-container)'
+        backendAzureRmKey: '$(backend-key)'
+
+    - script: terraform workspace select dev
+      displayName: 'Set Terraform Workspace to Dev'
+
+    - task: TerraformTaskV4@4
+      displayName: validate
+      inputs:
+        provider: 'azurerm'
+        command: 'validate'
+
+    - task: TerraformTaskV1@0
+      displayName: 'Terraform Plan'
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        var-file: '$(System.DefaultWorkingDirectory)/dev.tfvars' # TODO Change to prod for prod environment
+        workingDirectory: '$(System.DefaultWorkingDirectory)' # TODO Future: move all tf files to own folder
+        backendServiceArm: '$(ServiceConnectionName)'
+        backendAzureRmResourceGroupName: '$(backend-rg)'
+        backendAzureRmStorageAccountName: '$(backend-storage)'
+        backendAzureRmContainerName: '$(backend-container)'
+        backendAzureRmKey: '$(backend-key)'

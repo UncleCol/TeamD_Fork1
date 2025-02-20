@@ -1,0 +1,93 @@
+name: $(BuildDefinitionName)$(SourceBranchName)$(date:yyyyMMdd)
+
+trigger:
+  branches:
+    include:
+      - dev
+      - prod
+
+variables: #terraform variables
+  ServiceConnectionName: 'TeamDDevServiceConn'
+  bk-rg-name: 'teamd-sa-rg'
+  bk-strg-name: 'teamdsa'
+  bk-container-name: 'teamstoragecont'
+  bk-strg-key: 'acr-terraform.tfstate'
+  # TODO Move this to variables file and call it directly from plan, aply, destroy etc.
+
+pool:
+  name: cshaigh-managed-devops-pool
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: validate_terraform
+    displayName: 'Validate Terraform'
+
+    jobs:
+    - template: Exercise3/dev-plan.yml
+      parameters:
+        ServiceConnectionName: $(ServiceConnectionName)
+        backend-rg: $(bk-rg-name)
+        backend-storage: $(bk-strg-name)
+        backend-container: $(bk-container-name)
+        backend-key: $(bk-strg-key)
+        environment: 'dev'
+    - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
+      - template: Exercise3/prod-plan.yml
+        parameters:
+          ServiceConnectionName: $(ServiceConnectionName)
+          backend-rg: $(bk-rg-name)
+          backend-storage: $(bk-strg-name)
+          backend-container: $(bk-container-name)
+          backend-key: $(bk-strg-key)
+          environment: 'prod'
+
+  - stage: deploy_terraform
+    displayName: 'Deploy Terraform'
+    dependsOn: validate_terraform
+    condition: succeeded('validate_terraform')
+
+    jobs:
+    - template: Exercise3/dev-deploy.yml
+      parameters:
+        ServiceConnectionName: $(ServiceConnectionName)
+        backend-rg: $(bk-rg-name)
+        backend-storage: $(bk-strg-name)
+        backend-container: $(bk-container-name)
+        backend-key: $(bk-strg-key)
+        environment: 'dev'
+    - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/prod') }}:
+      - template: Exercise3/prod-deploy.yml
+        parameters:
+          ServiceConnectionName: $(ServiceConnectionName)
+          backend-rg: $(bk-rg-name)
+          backend-storage: $(bk-strg-name)
+          backend-container: $(bk-container-name)
+          backend-key: $(bk-strg-key)
+          environment: 'prod'
+
+
+
+
+
+# Set up an Azure DevOps Pipeline and integrate it with your GitHub repository using a Personal Access Token (PAT) for authentication.
+# DONE
+
+# Define pipeline jobs within your Azure DevOps Pipeline: Dev Plan, Dev Apply, Prod Plan, and Prod Apply.
+# Merged into plan.yml and deploy.yml, instead of having separate files for each job & each environment.
+
+# Ensure that each job utilizes the appropriate .tfvars files from Exercise 2 for configuration.
+# TODO Use dev.tfvars & prod.tfvars
+
+# Define Azure DevOps Pipelines named Dev Update and Prod Update
+
+# Configure the Dev Update Pipeline in Azure DevOps to trigger the Dev Plan job.
+
+# Add a manual approval step in the Dev Update Pipeline, prompting for approval before proceeding.
+
+# Upon approval, trigger the Dev Apply job to execute deployment.
+
+# Configure the Prod Update Pipeline in Azure DevOps to trigger the Prod Plan job.
+
+# Include a manual approval step in the Prod Update Pipeline, requiring approval before continuing.
+
+# Once approved, initiate the Prod Apply job to carry out the deployment.
