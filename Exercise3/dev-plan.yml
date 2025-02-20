@@ -25,22 +25,22 @@ jobs:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)'
-        backendServiceArm: '$(ServiceConnectionName)'
+        workingDirectory: $(System.DefaultWorkingDirectory)
+        backendServiceArm: $(ServiceConnectionName)
         backendAzureRmResourceGroupName: 'teamd-sa-rg'
-        backendAzureRmStorageAccountName: '$(backend-storage)'
-        backendAzureRmContainerName: '$(backend-container)'
-        backendAzureRmKey: '$(backend-key)'
+        backendAzureRmStorageAccountName: $(backend-storage)
+        backendAzureRmContainerName: $(backend-container)
+        backendAzureRmKey: $(backend-key)
     
     - task: TerraformTaskV4@4
       displayName: validate
       inputs:
-        workingDirectory: '$(System.DefaultWorkingDirectory)'
-        backendServiceArm: '$(ServiceConnectionName)'
+        workingDirectory: $(System.DefaultWorkingDirectory)
+        backendServiceArm: $(ServiceConnectionName)
         backendAzureRmResourceGroupName: 'teamd-sa-rg'
-        backendAzureRmStorageAccountName: '$(backend-storage)'
-        backendAzureRmContainerName: '$(backend-container)'
-        backendAzureRmKey: '$(backend-key)'
+        backendAzureRmStorageAccountName: $(backend-storage)
+        backendAzureRmContainerName: $(backend-container)
+        backendAzureRmKey: $(backend-key)
       continueOnError: false
 
     - task: TerraformTaskV4@4
@@ -51,12 +51,12 @@ jobs:
         commandOptions: 'select -or-create dev'
         outputTo: 'console'
         customCommand: 'workspace'
-        workingDirectory: '$(System.DefaultWorkingDirectory)'
-        backendServiceArm: '$(ServiceConnectionName)'
+        workingDirectory: $(System.DefaultWorkingDirectory)
+        backendServiceArm: $(ServiceConnectionName)
         backendAzureRmResourceGroupName: 'teamd-sa-rg'
-        backendAzureRmStorageAccountName: '$(backend-storage)'
-        backendAzureRmContainerName: '$(backend-container)'
-        backendAzureRmKey: '$(backend-key)' 
+        backendAzureRmStorageAccountName: $(backend-storage)
+        backendAzureRmContainerName: $(backend-container)
+        backendAzureRmKey: $(backend-key)
 
 
     - task: TerraformTaskV1@0
@@ -65,9 +65,9 @@ jobs:
         provider: 'azurerm'
         command: 'plan'
         var-file: '$(System.DefaultWorkingDirectory)/dev.tfvars' # TODO Change to prod for prod environment
-        workingDirectory: '$(System.DefaultWorkingDirectory)' # TODO Future: move all tf files to own folder
-        backendServiceArm: '$(ServiceConnectionName)'
-        backendAzureRmResourceGroupName: '$(backend-rg)'
-        backendAzureRmStorageAccountName: '$(backend-storage)'
-        backendAzureRmContainerName: '$(backend-container)'
-        backendAzureRmKey: '$(backend-key)'
+        workingDirectory: $(System.DefaultWorkingDirectory) # TODO Future: move all tf files to own folder
+        backendServiceArm: $(ServiceConnectionName)
+        backendAzureRmResourceGroupName: $(backend-rg)
+        backendAzureRmStorageAccountName: $(backend-storage)
+        backendAzureRmContainerName: $(backend-container)
+        backendAzureRmKey: $(backend-key)
