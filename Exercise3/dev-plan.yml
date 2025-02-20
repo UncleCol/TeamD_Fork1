@@ -30,7 +30,7 @@ jobs:
         backendAzureRmContainerName: '$(backend-container)'
         backendAzureRmKey: '$(backend-key)'
 
-    - script: terraform workspace select dev
+    - script: terraform workspace select -or-create dev
       displayName: 'Set Terraform Workspace to Dev'
 
     - task: TerraformTaskV4@4

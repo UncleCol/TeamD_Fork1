@@ -1,0 +1,8 @@
+jobs:
+  - job: deploy
+    displayName: 'deploy draft'
+    continueOnError: false
+
+    steps:
+    - script: echo 'draft for deploying'
+      displayName: 'Deploying Draft'
