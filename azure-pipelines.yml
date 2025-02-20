@@ -15,34 +15,9 @@ variables:
   bkstrgkey: 'acr-terraform.tfstate'
 
 stages:
-  - stage: tfvalidate
+  - stage: tfdestroy
     jobs:
-      - job: validate
-        continueOnError: false
-        steps:
-        - task: TerraformInstaller@1
-          displayName: tfinstall
-          inputs:
-            terraformVersion: 'latest'
-        - task: TerraformTaskV4@4
-          inputs:
-            provider: 'azurerm'
-            command: 'init'
-            backendServiceArm: 'TeamDDevServiceConn'
-            backendAzureRmResourceGroupName: 'teamd-sa-rg'
-            backendAzureRmStorageAccountName: 'teamdsa'
-            backendAzureRmContainerName: 'teamdstoragecont'
-            backendAzureRmKey: 'acr-terraform.tfstate'
-        - task: TerraformTaskV4@4
-          displayName: validate
-          inputs:
-            provider: 'azurerm'
-            command: 'validate'
-  - stage: tfdeploy
-    condition: succeeded('tfvalidate')
-    dependsOn: tfvalidate
-    jobs:
-      - job: apply
+      - job: destroy
         steps:
           - task: TerraformInstaller@1
             displayName: tfinstall
@@ -65,8 +40,8 @@ stages:
               command: 'plan'
               environmentServiceNameAzureRM: 'TeamDDevServiceConn'
           - task: TerraformTaskV4@4
-            displayName: apply
+            displayName: destroy
             inputs:
               provider: 'azurerm'
-              command: 'apply'
+              command: 'destroy'
               environmentServiceNameAzureRM: 'TeamDDevServiceConn'
