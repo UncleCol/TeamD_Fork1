@@ -1,10 +1,10 @@
 name: $(BuildDefinitionName)$(SourceBranchName)$(date:yyyyMMdd)
 
-trigger:
-  branches:
-    include:
-      - dev
-      - prod
+trigger: none
+  # branches:
+  #   include:
+  #     - dev
+  #     - prod
 
 variables: #terraform variables
   ServiceConnectionName: 'TeamDDevServiceConn'
@@ -31,15 +31,15 @@ stages:
         backend-container: $(bk-container-name)
         backend-key: $(bk-strg-key)
         environment: 'dev'
-    - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
-      - template: prod-plan.yml
-        parameters:
-          ServiceConnectionName: $(ServiceConnectionName)
-          backend-rg: $(bk-rg-name)
-          backend-storage: $(bk-strg-name)
-          backend-container: $(bk-container-name)
-          backend-key: $(bk-strg-key)
-          environment: 'prod'
+    # - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
+    #   - template: prod-plan.yml
+    #     parameters:
+    #       ServiceConnectionName: $(ServiceConnectionName)
+    #       backend-rg: $(bk-rg-name)
+    #       backend-storage: $(bk-strg-name)
+    #       backend-container: $(bk-container-name)
+    #       backend-key: $(bk-strg-key)
+    #       environment: 'prod'
 
   - stage: deploy_terraform
     displayName: 'Deploy Terraform'
@@ -55,15 +55,15 @@ stages:
         backend-container: $(bk-container-name)
         backend-key: $(bk-strg-key)
         environment: 'dev'
-    - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/prod') }}:
-      - template: prod-deploy.yml
-        parameters:
-          ServiceConnectionName: $(ServiceConnectionName)
-          backend-rg: $(bk-rg-name)
-          backend-storage: $(bk-strg-name)
-          backend-container: $(bk-container-name)
-          backend-key: $(bk-strg-key)
-          environment: 'prod'
+    # - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/prod') }}:
+    #   - template: prod-deploy.yml
+    #     parameters:
+    #       ServiceConnectionName: $(ServiceConnectionName)
+    #       backend-rg: $(bk-rg-name)
+    #       backend-storage: $(bk-strg-name)
+    #       backend-container: $(bk-container-name)
+    #       backend-key: $(bk-strg-key)
+    #       environment: 'prod'
 
 
 
