@@ -30,8 +30,15 @@ jobs:
         backendAzureRmContainerName: '$(backend-container)'
         backendAzureRmKey: '$(backend-key)'
 
-    - script: terraform workspace select -or-create dev
+    - task: TerraformTaskV4@4
       displayName: 'Set Terraform Workspace to Dev'
+      inputs:
+        provider: 'azurerm'
+        command: 'custom'
+        commandOptions: 'select -or-create dev'
+        outputTo: 'console'
+        customCommand: 'workspace'
+        workingDirectory: '$(System.DefaultWorkingDirectory)'  
 
     - task: TerraformTaskV4@4
       displayName: validate
