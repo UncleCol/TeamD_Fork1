@@ -66,17 +66,17 @@ resource "azurerm_network_interface" "nic-priv2" {
 }
 
 
-resource "azurerm_network_interface" "nic-lb" {
-  name                = "${var.name}-${var.environment}-nic-lb"
-  location            = var.location
-  resource_group_name = azurerm_resource_group.resource_group.name
+# resource "azurerm_network_interface" "nic-lb" {
+#   name                = "${var.name}-${var.environment}-nic-lb"
+#   location            = var.location
+#   resource_group_name = azurerm_resource_group.resource_group.name
 
-  ip_configuration {
-	name                          = "${var.name}-${var.environment}-ip-cfg-lb"
-	subnet_id                     = azurerm_subnet.lb_subnet.id
-	private_ip_address_allocation = "Dynamic"
-	public_ip_address_id          = azurerm_public_ip.public_ip.id
-  }
+#   ip_configuration {
+# 	name                          = "${var.name}-${var.environment}-ip-cfg-lb"
+# 	subnet_id                     = azurerm_subnet.lb_subnet.id
+# 	private_ip_address_allocation = "Dynamic"
+# 	public_ip_address_id          = azurerm_public_ip.public_ip.id
+#   }
 
-  tags = var.tags
-}
+#   tags = var.tags
+# }

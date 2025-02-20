@@ -12,3 +12,7 @@ ag_subnet_address_prefix = "192.168.3.0/24"
 admin_username = "azureuser"
 admin_password = "IrishLife1234!"
 vm_size        = "Standard_B1s"
+
+# SQL
+sql_admin_password = "IrishLife1234!"
+sql_admin_username = "sqladmin"
