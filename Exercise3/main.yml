@@ -23,7 +23,7 @@ stages:
     displayName: 'Validate Terraform'
 
     jobs:
-    - template: Exercise3/dev-plan.yml
+    - template: dev-plan.yml
       parameters:
         ServiceConnectionName: $(ServiceConnectionName)
         backend-rg: $(bk-rg-name)
@@ -32,7 +32,7 @@ stages:
         backend-key: $(bk-strg-key)
         environment: 'dev'
     - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
-      - template: Exercise3/prod-plan.yml
+      - template: prod-plan.yml
         parameters:
           ServiceConnectionName: $(ServiceConnectionName)
           backend-rg: $(bk-rg-name)
@@ -47,7 +47,7 @@ stages:
     condition: succeeded('validate_terraform')
 
     jobs:
-    - template: Exercise3/dev-deploy.yml
+    - template: dev-deploy.yml
       parameters:
         ServiceConnectionName: $(ServiceConnectionName)
         backend-rg: $(bk-rg-name)
@@ -56,7 +56,7 @@ stages:
         backend-key: $(bk-strg-key)
         environment: 'dev'
     - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/prod') }}:
-      - template: Exercise3/prod-deploy.yml
+      - template: prod-deploy.yml
         parameters:
           ServiceConnectionName: $(ServiceConnectionName)
           backend-rg: $(bk-rg-name)
