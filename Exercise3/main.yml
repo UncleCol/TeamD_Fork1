@@ -26,7 +26,8 @@ stages:
     - template: dev-plan.yml
       parameters:
         ServiceConnectionName: $(ServiceConnectionName)
-        backend-rg: $(bk-rg-name)
+        # backend-rg: $(bk-rg-name)
+        backend-rg: 'teamd-sa-rg'
         backend-storage: $(bk-strg-name)
         backend-container: $(bk-container-name)
         backend-key: $(bk-strg-key)

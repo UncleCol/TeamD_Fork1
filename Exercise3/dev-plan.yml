@@ -27,7 +27,7 @@ jobs:
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)'
         backendServiceArm: '$(ServiceConnectionName)'
-        backendAzureRmResourceGroupName: '$(backend-rg)'
+        backendAzureRmResourceGroupName: 'teamd-sa-rg'
         backendAzureRmStorageAccountName: '$(backend-storage)'
         backendAzureRmContainerName: '$(backend-container)'
         backendAzureRmKey: '$(backend-key)'
@@ -35,9 +35,12 @@ jobs:
     - task: TerraformTaskV4@4
       displayName: validate
       inputs:
-        provider: 'azurerm'
-        command: 'validate'
         workingDirectory: '$(System.DefaultWorkingDirectory)'
+        backendServiceArm: '$(ServiceConnectionName)'
+        backendAzureRmResourceGroupName: 'teamd-sa-rg'
+        backendAzureRmStorageAccountName: '$(backend-storage)'
+        backendAzureRmContainerName: '$(backend-container)'
+        backendAzureRmKey: '$(backend-key)'
       continueOnError: false
 
     - task: TerraformTaskV4@4
@@ -48,7 +51,12 @@ jobs:
         commandOptions: 'select -or-create dev'
         outputTo: 'console'
         customCommand: 'workspace'
-        workingDirectory: '$(System.DefaultWorkingDirectory)'  
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
+        backendServiceArm: '$(ServiceConnectionName)'
+        backendAzureRmResourceGroupName: 'teamd-sa-rg'
+        backendAzureRmStorageAccountName: '$(backend-storage)'
+        backendAzureRmContainerName: '$(backend-container)'
+        backendAzureRmKey: '$(backend-key)' 
 
 
     - task: TerraformTaskV1@0
