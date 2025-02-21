@@ -24,7 +24,7 @@ jobs:
         inputs:
           provider: 'azurerm'
           command: 'init'
-          commandOptions: '-reconfigure'
+          commandOptions: '-migrate-state'
           workingDirectory: $(System.DefaultWorkingDirectory)
           backendServiceArm: $(ServiceConnectionName)
           backendAzureRmResourceGroupName: 'teamd-sa-rg'
