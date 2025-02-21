@@ -24,14 +24,15 @@ jobs:
         inputs:
           provider: 'azurerm'
           command: 'init'
-          commandOptions: '-migrate-state'
+          # commandOptions: '-migrate-state'
           # commandOptions: '-reconfigure'
           workingDirectory: $(System.DefaultWorkingDirectory)
           backendServiceArm: $(ServiceConnectionName)
           backendAzureRmResourceGroupName: 'teamd-sa-rg'
           backendAzureRmStorageAccountName: 'teamdsa'
           backendAzureRmContainerName: 'teamdstoragecont'
-          backendAzureRmKey: 'acr-terraform.tfstate'
+          backendAzureRmKey: 'acr-terraform.tfstateenv:dev'
+          # backendAzureRmKey: 'acr-terraform.tfstate'
       
       - task: TerraformTaskV4@4
         displayName: validate
