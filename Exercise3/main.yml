@@ -42,11 +42,6 @@ stages:
     #       backend-key: $(bk-strg-key)
     #       environment: 'prod'
 
-  - stage: deploy_terraform
-    displayName: 'Deploy Terraform'
-    dependsOn: validate_terraform
-    condition: succeeded('validate_terraform')
-
     jobs:
     - template: dev-deploy.yml
       parameters:

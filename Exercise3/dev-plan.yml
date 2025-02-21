@@ -1,13 +1,5 @@
 # take in parameters from main.yml and use them to run terraform plan
 
-parameters:
-  ServiceConnectionName: ''
-  backend-rg: ''
-  backend-storage: ''
-  backend-container: ''
-  backend-key: ''
-  environment: '' # For future use
-
 jobs:
   - job: plan
     displayName: 'Terraform Plan'
@@ -59,6 +51,6 @@ jobs:
         inputs:
           provider: 'azurerm'
           command: 'plan'
-          var-file: '$(System.DefaultWorkingDirectory)/dev.tfvars' # TODO Change to prod for prod environment
+          commandOptions: '-var-file="dev.tfvars"' # TODO Change to prod for prod environment
           workingDirectory: $(System.DefaultWorkingDirectory) # TODO Future: move all tf files to own folder
           environmentServiceNameAzureRM: $(ServiceConnectionName)
