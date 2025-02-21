@@ -25,7 +25,6 @@ stages:
     jobs:
     - template: dev-plan.yml
       parameters:
-        ServiceConnectionName: $(ServiceConnectionName)
         environment: 'dev'
     # - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
     #   - template: prod-plan.yml
@@ -41,7 +40,6 @@ stages:
     jobs:
     - template: dev-deploy.yml
       parameters:
-        ServiceConnectionName: $(ServiceConnectionName)
         backend-rg: 'teamd-sa-rg'
         backend-storage: 'teamdsa'
         backend-container: 'teamdstoragecont'
