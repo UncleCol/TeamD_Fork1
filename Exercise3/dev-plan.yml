@@ -34,11 +34,11 @@ jobs:
           backendAzureRmKey: 'acr-terraform.tfstate'
           
       
-      - task: TerraformTaskV4@4
-        displayName: validate
-        inputs:
-          workingDirectory: $(System.DefaultWorkingDirectory)
-          # environmentServiceNameAzureRM: $(ServiceConnectionName)
+      # - task: TerraformTaskV4@4
+      #   displayName: validate
+      #   inputs:
+      #     workingDirectory: $(System.DefaultWorkingDirectory)
+      #     # environmentServiceNameAzureRM: $(ServiceConnectionName)
 
         continueOnError: false
 
