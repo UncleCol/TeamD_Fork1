@@ -24,6 +24,7 @@ jobs:
         inputs:
           provider: 'azurerm'
           command: 'init'
+          commandOptions: '-reconfigure'
           workingDirectory: $(System.DefaultWorkingDirectory)
           backendServiceArm: $(ServiceConnectionName)
           backendAzureRmResourceGroupName: 'teamd-sa-rg'
@@ -42,20 +43,20 @@ jobs:
           backendAzureRmKey: 'acr-terraform.tfstate'
         continueOnError: false
 
-      # - task: TerraformTaskV4@4
-      #   displayName: 'Set Terraform Workspace to Dev'
-      #   inputs:
-      #     provider: 'azurerm'
-      #     command: 'custom'
-      #     commandOptions: 'select -or-create dev'
-      #     outputTo: 'console'
-      #     customCommand: 'workspace'
-      #     workingDirectory: $(System.DefaultWorkingDirectory)
-      #     backendServiceArm: $(ServiceConnectionName)
-      #     backendAzureRmResourceGroupName: 'teamd-sa-rg'
-      #     backendAzureRmStorageAccountName: 'teamdsa'
-      #     backendAzureRmContainerName: 'teamdstoragecont'
-      #     backendAzureRmKey: 'acr-terraform.tfstate'
+      - task: TerraformTaskV4@4
+        displayName: 'Set Terraform Workspace to Dev'
+        inputs:
+          provider: 'azurerm'
+          command: 'custom'
+          commandOptions: 'select -or-create dev'
+          outputTo: 'console'
+          customCommand: 'workspace'
+          workingDirectory: $(System.DefaultWorkingDirectory)
+          backendServiceArm: $(ServiceConnectionName)
+          backendAzureRmResourceGroupName: 'teamd-sa-rg'
+          backendAzureRmStorageAccountName: 'teamdsa'
+          backendAzureRmContainerName: 'teamdstoragecont'
+          backendAzureRmKey: 'acr-terraform.tfstate'
 
 
       - task: TerraformTaskV1@0

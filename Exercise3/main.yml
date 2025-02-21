@@ -10,7 +10,7 @@ variables: #terraform variables
   ServiceConnectionName: 'TeamDDevServiceConn'
   bk-rg-name: 'teamd-sa-rg'
   bk-strg-name: 'teamdsa'
-  bk-container-name: 'teamstoragecont'
+  bk-container-name: 'teamdstoragecont'
   bk-strg-key: 'acr-terraform.tfstate'
   # TODO Move this to variables file and call it directly from plan, aply, destroy etc.
 
@@ -29,7 +29,7 @@ stages:
         # backend-rg: $(bk-rg-name)
         backend-rg: 'teamd-sa-rg'
         backend-storage: 'teamdsa'
-        backend-container: 'teamstoragecont'
+        backend-container: 'teamdstoragecont'
         backend-key: 'acr-terraform.tfstate'
         environment: 'dev'
     # - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
@@ -53,7 +53,7 @@ stages:
         ServiceConnectionName: $(ServiceConnectionName)
         backend-rg: 'teamd-sa-rg'
         backend-storage: 'teamdsa'
-        backend-container: 'teamstoragecont'
+        backend-container: 'teamdstoragecont'
         backend-key: 'acr-terraform.tfstate'
         environment: 'dev'
     # - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/prod') }}:
