@@ -7,7 +7,7 @@ trigger: none
   #     - prod
 
 variables: #terraform variables
-  ServiceConnectionName: 'TeamDDevServiceConn'
+  ServiceConnectionName: 'NewTeamDServiceConnector'
   bk-rg-name: 'teamd-sa-rg'
   bk-strg-name: 'teamdsa'
   bk-container-name: 'teamdstoragecont'
